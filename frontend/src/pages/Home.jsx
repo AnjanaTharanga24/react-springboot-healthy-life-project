@@ -7,6 +7,7 @@ import {
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../css/home.css";
+import cardImage from "../images/height.png"
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -89,7 +90,9 @@ export default function Home() {
         return (
           <div className="card question-card shadow">
             <div className="" style={{ marginTop: "50px" }}>
-              <p className="q-card-tile">Enter your age..</p>
+
+                <img src={cardImage} style={{width:"320px",height:"200px" , marginTop:"-40px",marginLeft:"50px"}}></img>
+              <p className="q-card-tile" style={{marginBottom:"5px"}}>Enter your age..</p>
 
               <input
                 type="number"
@@ -97,7 +100,7 @@ export default function Home() {
                 placeholder="Enter age"
               />
 
-              <div className="d-flex ms-3 p-3">
+              <div className="d-flex ms-3 p-3 ">
                 <button
                   className="btn btn-dark previous-btn  mb-4"
                   onClick={handlePrevious}
