@@ -1,0 +1,30 @@
+.question-card{
+    height: 400px;
+    width: 350px;
+    margin-left: 550px;
+    margin-top: 50px;
+    margin-bottom: -120px;
+}
+
+.q-card-tile{
+    margin-top: 20px;
+    margin-left: 70px;
+    font-size: 30px;    
+}
+
+.q-card{
+    height: 50px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.q-card-tile-text{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.getstarted-btn{
+    margin-left: 80px;
+    margin-top: -20px;
+    width: 200px;
+}
