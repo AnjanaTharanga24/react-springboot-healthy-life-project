@@ -28,3 +28,13 @@
     margin-top: -20px;
     width: 200px;
 }
+
+.previous-btn{
+    width: 150px;
+    font-size: 20px;
+}
+
+.next-btn{
+    width: 150px;
+    font-size: 20px;
+}
