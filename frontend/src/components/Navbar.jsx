@@ -27,9 +27,11 @@ export default function () {
         </div>
 
         <div className="nav-buttons">
+          <Link to="/login">
           <button className="btn btn-success" style={{ marginRight: "20px" }}>
             Sigin
           </button>
+          </Link>
           <Link to="/register">
           <button className="btn btn-warning text-white">Sigup</button>
           </Link>
