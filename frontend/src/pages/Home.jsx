@@ -12,9 +12,30 @@ import cardImage from "../images/height.png";
 import cardImage1 from "../images/age.png";
 import cardImage2 from "../images/weight.png";
 import cardImage3 from "../images/goalweight.png";
+import axios from "axios";
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
+  const [answers , setAnswers] = useState({
+    goal:"",
+    gender:"",
+    age:"",
+    height:"",
+    weight:"",
+    activityLevel:"",
+    goalWeight:"",
+    gymStatus:""
+  });
+
+
+  const handleAnswers = async () =>{
+    try {
+      const response = await axios.post(`http://localhost:8082/users/1/answers`,answers)
+      setAnswers(response.data)
+    } catch (error) {
+      
+    }
+  }
 
   const handleNext = (e) => {
     setCurrentStep(currentStep + 1);
@@ -34,13 +55,13 @@ export default function Home() {
 
               <div className="p-4">
                 <div className="card q-card">
-                  <p className="q-card-tile-text">Lose weight</p>
+                  <p className="q-card-tile-text" name="goal" value={answers.goal}>Lose weight</p>
                 </div>
                 <div className="card q-card">
-                  <p className="q-card-tile-text">Gain weight</p>
+                  <p className="q-card-tile-text" name="goal" value={answers.goal}>Gain weight</p>
                 </div>
                 <div className="card q-card">
-                  <p className="q-card-tile-text">Maintain weight</p>
+                  <p className="q-card-tile-text" name="goal" value={answers.goal}>Maintain weight</p>
                 </div>
               </div>
 
@@ -64,10 +85,10 @@ export default function Home() {
 
               <div className="p-4">
                 <div className="card q-card">
-                  <p className="q-card-tile-text">Male</p>
+                  <p className="q-card-tile-text" name="gender" value={answers.gender}>Male</p>
                 </div>
                 <div className="card q-card">
-                  <p className="q-card-tile-text">Female</p>
+                  <p className="q-card-tile-text" name="gender" value={answers.gender}>Female</p>
                 </div>
               </div>
 
@@ -111,6 +132,8 @@ export default function Home() {
                 type="number"
                 className="form-control w-75 ms-5"
                 placeholder="Enter age"
+                name="age" 
+                value={answers.age}
               />
 
               <div className="d-flex ms-3 p-3 ">
@@ -153,6 +176,8 @@ export default function Home() {
                 type="number"
                 className="form-control w-75 ms-5"
                 placeholder="Enter age"
+                name="height"
+                value={answers.height}
               />
 
               <div className="d-flex ms-3 p-3 ">
@@ -196,6 +221,8 @@ export default function Home() {
                 type="number"
                 className="form-control w-75 ms-5"
                 placeholder="Enter age"
+                name="weight" 
+                value={answers.weight}
               />
 
               <div className="d-flex ms-3 p-3 ">
@@ -227,13 +254,13 @@ export default function Home() {
 
               <div className="p-4">
                 <div className="card q-card">
-                  <p className="q-card-tile-text">Active</p>
+                  <p className="q-card-tile-text" name="activityLevel" value={answers.activityLevel}>Active</p>
                 </div>
                 <div className="card q-card">
-                  <p className="q-card-tile-text">Moderately active</p>
+                  <p className="q-card-tile-text" name="activityLevel" value={answers.activityLevel}>Moderately active</p>
                 </div>
                 <div className="card q-card">
-                  <p className="q-card-tile-text">Sedentary</p>
+                  <p className="q-card-tile-text" name="activityLevel" value={answers.activityLevel}>Sedentary</p>
                 </div>
               </div>
 
@@ -277,6 +304,8 @@ export default function Home() {
                 type="number"
                 className="form-control w-75 ms-5"
                 placeholder="Enter age"
+                name="goalWeight"
+                value={answers.goalWeight}
               />
 
               <div className="d-flex ms-3 p-3 ">
@@ -306,10 +335,10 @@ export default function Home() {
 
             <div className="p-4">
               <div className="card q-card">
-                <p className="q-card-tile-text">Yes</p>
+                <p className="q-card-tile-text" name="gymStatus" value={answers.gymStatus}>Yes</p>
               </div>
               <div className="card q-card">
-                <p className="q-card-tile-text">No</p>
+                <p className="q-card-tile-text" name="gymStatus" value={answers.gymStatus}>No</p>
               </div>
             </div>
 
@@ -323,6 +352,7 @@ export default function Home() {
               </button>
               <button
                 className="btn btn-success next-btn mb-4 ms-4"
+                onClick={handleAnswers}
               >
                 Submit
                 <FontAwesomeIcon className="ms-2" icon={faPaperPlane} /> 
