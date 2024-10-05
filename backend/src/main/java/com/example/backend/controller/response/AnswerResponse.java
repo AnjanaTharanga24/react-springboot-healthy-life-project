@@ -1,28 +1,24 @@
-package com.example.backend.model;
+package com.example.backend.controller.response;
 
-import jakarta.persistence.*;
+import com.example.backend.model.Gender;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-@Entity
-@Data
-@Table(name = "answers")
-public class Answer {
+import lombok.NoArgsConstructor;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class AnswerResponse {
+
     private Long id;
     private String goal;
-
-    @Enumerated(EnumType.STRING)
     private Gender gender;
-
     private Integer age;
     private Float height;
     private Float weight;
     private String activityLevel;
     private Float goalWeight;
     private String gymStatus;
-
-    @OneToOne
-    private User user;
-
 }
