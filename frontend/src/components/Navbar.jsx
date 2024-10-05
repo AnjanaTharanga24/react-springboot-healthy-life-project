@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/navbar.css";
 import logo from "../images/logo.png";
+import { Link } from "react-router-dom";
 export default function () {
   return (
     <div>
@@ -29,7 +30,9 @@ export default function () {
           <button className="btn btn-success" style={{ marginRight: "20px" }}>
             Sigin
           </button>
+          <Link to="/register">
           <button className="btn btn-warning text-white">Sigup</button>
+          </Link>
         </div>
       </nav>
     </div>
