@@ -1,21 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { UserContext } from "../components/UserContext";
 
 export default function () {
   const navigate = useNavigate();
-  const [user,setUser] = useState({
-    email:"",
-    password:""
-  })
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  const {setUser}=useContext(UserContext);
 
   const handleLogin = async (e) =>{
      e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:8082/users/login`,user)
+      const response = await axios.post(`http://localhost:8082/users/login`,{
+        email,
+        password
+      })
       console.log(response.data)
       setUser(response.data)
       Swal.fire({
@@ -62,8 +65,8 @@ export default function () {
                 className="form-control"
                 placeholder="Enter email"
                 name="email"
-                value={user.email}
-                onChange={(e) => setUser({ ...user, email: e.target.value })}
+                value={email}
+                onChange={(e) => setEmail(e.target.value )}
               />
             </div>
            
@@ -74,8 +77,8 @@ export default function () {
                 className="form-control"
                 placeholder="Enter password"
                 name="password"
-                value={user.password}
-                onChange={(e)=>setUser({...user,password:e.target.value})}
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
               />
             </div>
 
