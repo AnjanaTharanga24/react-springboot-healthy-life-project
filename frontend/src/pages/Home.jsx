@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleArrowLeft,
@@ -13,35 +13,79 @@ import cardImage1 from "../images/age.png";
 import cardImage2 from "../images/weight.png";
 import cardImage3 from "../images/goalweight.png";
 import axios from "axios";
+import { UserContext } from "../components/UserContext";
+import Swal from "sweetalert2";
 
 export default function Home() {
+  const {user} = useContext(UserContext);
   const [currentStep, setCurrentStep] = useState(1);
-  const [answers , setAnswers] = useState({
-    goal:"",
-    gender:"",
-    age:"",
-    height:"",
-    weight:"",
-    activityLevel:"",
-    goalWeight:"",
-    gymStatus:""
+  const [answers, setAnswers] = useState({
+    goal: "",
+    gender: "",
+    age: "",
+    height: "",
+    weight: "",
+    activityLevel: "",
+    goalWeight: "",
+    gymStatus: ""
   });
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setAnswers(prevAnswers => ({
+      ...prevAnswers,
+      [name]: value
+    }));
+  };
 
-  const handleAnswers = async () =>{
+  const handleSubmit = async () => {
     try {
-      const response = await axios.post(`http://localhost:8082/users/1/answers`,answers)
-      setAnswers(response.data)
-    } catch (error) {
-      
-    }
-  }
+      const transformedAnswers = {
+        ...answers,
+        age: parseInt(answers.age, 10),
+        height: parseFloat(answers.height),
+        weight: parseFloat(answers.weight),
+        goalWeight: parseFloat(answers.goalWeight),
+        gender: answers.gender.toUpperCase(),
+      };
 
-  const handleNext = (e) => {
+      console.log("Sending data to server:", transformedAnswers);
+      const response = await axios.post(`http://localhost:8082/users/${user.id}/answers`, transformedAnswers);
+      console.log("Response from server:", response.data);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Submitted successfully",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Something went wrong",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      console.error("Error submitting answers:", error);
+      if (error.response) {
+        console.error("Server responded with:", error.response.data);
+        console.error("Status code:", error.response.status);
+        console.error("Headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+      } else {
+        console.error("Error setting up request:", error.message);
+      }
+    }
+  };
+
+
+  const handleNext = () => {
     setCurrentStep(currentStep + 1);
   };
 
-  const handlePrevious = (e) => {
+  const handlePrevious = () => {
     setCurrentStep(currentStep - 1);
   };
 
@@ -54,15 +98,11 @@ export default function Home() {
               <p className="q-card-tile">select your goal..</p>
 
               <div className="p-4">
-                <div className="card q-card">
-                  <p className="q-card-tile-text" name="goal" value={answers.goal}>Lose weight</p>
-                </div>
-                <div className="card q-card">
-                  <p className="q-card-tile-text" name="goal" value={answers.goal}>Gain weight</p>
-                </div>
-                <div className="card q-card">
-                  <p className="q-card-tile-text" name="goal" value={answers.goal}>Maintain weight</p>
-                </div>
+                {["Lose weight", "Gain weight", "Maintain weight"].map((goal) => (
+                  <div key={goal} className="card q-card" onClick={() => handleInputChange({ target: { name: "goal", value: goal } })}>
+                    <p className={`q-card-tile-text ${answers.goal === goal ? "selected" : ""}`}>{goal}</p>
+                  </div>
+                ))}
               </div>
 
               <div>
@@ -84,12 +124,11 @@ export default function Home() {
               <p className="q-card-tile">Enter your gender..</p>
 
               <div className="p-4">
-                <div className="card q-card">
-                  <p className="q-card-tile-text" name="gender" value={answers.gender}>Male</p>
-                </div>
-                <div className="card q-card">
-                  <p className="q-card-tile-text" name="gender" value={answers.gender}>Female</p>
-                </div>
+                {["Male", "Female"].map((gender) => (
+                  <div key={gender} className="card q-card" onClick={() => handleInputChange({ target: { name: "gender", value: gender } })}>
+                    <p className={`q-card-tile-text ${answers.gender === gender ? "selected" : ""}`}>{gender}</p>
+                  </div>
+                ))}
               </div>
 
               <div className="d-flex ms-3 p-3">
@@ -117,13 +156,14 @@ export default function Home() {
             <div className="" style={{ marginTop: "50px" }}>
               <img
                 src={cardImage1}
+                alt="Age"
                 style={{
                   width: "320px",
                   height: "200px",
                   marginTop: "-40px",
                   marginLeft: "27px",
                 }}
-              ></img>
+              />
               <p className="q-card-tile" style={{ marginBottom: "5px" }}>
                 Enter your age..
               </p>
@@ -132,8 +172,9 @@ export default function Home() {
                 type="number"
                 className="form-control w-75 ms-5"
                 placeholder="Enter age"
-                name="age" 
+                name="age"
                 value={answers.age}
+                onChange={handleInputChange}
               />
 
               <div className="d-flex ms-3 p-3 ">
@@ -161,13 +202,14 @@ export default function Home() {
             <div className="" style={{ marginTop: "50px" }}>
               <img
                 src={cardImage}
+                alt="Height"
                 style={{
                   width: "320px",
                   height: "200px",
                   marginTop: "-40px",
                   marginLeft: "50px",
                 }}
-              ></img>
+              />
               <p className="q-card-tile" style={{ marginBottom: "5px" }}>
                 Enter your height..
               </p>
@@ -175,9 +217,10 @@ export default function Home() {
               <input
                 type="number"
                 className="form-control w-75 ms-5"
-                placeholder="Enter age"
+                placeholder="Enter height"
                 name="height"
                 value={answers.height}
+                onChange={handleInputChange}
               />
 
               <div className="d-flex ms-3 p-3 ">
@@ -206,13 +249,14 @@ export default function Home() {
             <div className="" style={{ marginTop: "50px" }}>
               <img
                 src={cardImage2}
+                alt="Weight"
                 style={{
                   width: "320px",
                   height: "200px",
                   marginTop: "-40px",
                   marginLeft: "10px",
                 }}
-              ></img>
+              />
               <p className="q-card-tile" style={{ marginBottom: "5px" }}>
                 Enter your weight..
               </p>
@@ -220,9 +264,10 @@ export default function Home() {
               <input
                 type="number"
                 className="form-control w-75 ms-5"
-                placeholder="Enter age"
-                name="weight" 
+                placeholder="Enter weight"
+                name="weight"
                 value={answers.weight}
+                onChange={handleInputChange}
               />
 
               <div className="d-flex ms-3 p-3 ">
@@ -253,15 +298,11 @@ export default function Home() {
               </p>
 
               <div className="p-4">
-                <div className="card q-card">
-                  <p className="q-card-tile-text" name="activityLevel" value={answers.activityLevel}>Active</p>
-                </div>
-                <div className="card q-card">
-                  <p className="q-card-tile-text" name="activityLevel" value={answers.activityLevel}>Moderately active</p>
-                </div>
-                <div className="card q-card">
-                  <p className="q-card-tile-text" name="activityLevel" value={answers.activityLevel}>Sedentary</p>
-                </div>
+                {["Active", "Moderately active", "Sedentary"].map((level) => (
+                  <div key={level} className="card q-card" onClick={() => handleInputChange({ target: { name: "activityLevel", value: level } })}>
+                    <p className={`q-card-tile-text ${answers.activityLevel === level ? "selected" : ""}`}>{level}</p>
+                  </div>
+                ))}
               </div>
 
               <div className="d-flex ms-3 p-3 ">
@@ -289,13 +330,14 @@ export default function Home() {
             <div className="" style={{ marginTop: "50px" }}>
               <img
                 src={cardImage3}
+                alt="Goal Weight"
                 style={{
                   width: "320px",
                   height: "200px",
                   marginTop: "-40px",
                   marginLeft: "20px",
                 }}
-              ></img>
+              />
               <p className="q-card-tile" style={{ marginBottom: "5px" }}>
                 Your goal weight..
               </p>
@@ -303,9 +345,10 @@ export default function Home() {
               <input
                 type="number"
                 className="form-control w-75 ms-5"
-                placeholder="Enter age"
+                placeholder="Enter goal weight"
                 name="goalWeight"
                 value={answers.goalWeight}
+                onChange={handleInputChange}
               />
 
               <div className="d-flex ms-3 p-3 ">
@@ -334,12 +377,11 @@ export default function Home() {
             <p className="q-card-tile"> Your Gym status..</p>
 
             <div className="p-4">
-              <div className="card q-card">
-                <p className="q-card-tile-text" name="gymStatus" value={answers.gymStatus}>Yes</p>
-              </div>
-              <div className="card q-card">
-                <p className="q-card-tile-text" name="gymStatus" value={answers.gymStatus}>No</p>
-              </div>
+              {["Yes", "No"].map((status) => (
+                <div key={status} className="card q-card" onClick={() => handleInputChange({ target: { name: "gymStatus", value: status } })}>
+                  <p className={`q-card-tile-text ${answers.gymStatus === status ? "selected" : ""}`}>{status}</p>
+                </div>
+              ))}
             </div>
 
             <div className="d-flex ms-3 p-3">
@@ -352,11 +394,10 @@ export default function Home() {
               </button>
               <button
                 className="btn btn-success next-btn mb-4 ms-4"
-                onClick={handleAnswers}
+                onClick={handleSubmit}
               >
                 Submit
-                <FontAwesomeIcon className="ms-2" icon={faPaperPlane} /> 
-
+                <FontAwesomeIcon className="ms-2" icon={faPaperPlane} />
               </button>
             </div>
           </div>
@@ -366,11 +407,11 @@ export default function Home() {
         return null;
     }
   };
+
   return (
     <div>
       <Navbar />
       {renderStep()}
-
       <Footer />
     </div>
   );

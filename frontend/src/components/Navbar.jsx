@@ -3,6 +3,7 @@ import "../css/navbar.css";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import { UserContext } from "./UserContext";
+import Swal from "sweetalert2";
 export default function () {
   const { user, setUser } = useContext(UserContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -10,6 +11,13 @@ export default function () {
   const handleLogout = () => {
     setUser(null);
     setDropdownOpen(false);
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Logout successfully",
+      showConfirmButton: false,
+      timer: 1500
+    });
   };
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
