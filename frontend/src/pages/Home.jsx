@@ -409,9 +409,11 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div  className="home-bg">
       <Navbar />
+      <div >
       {renderStep()}
+      </div>
       <Footer />
     </div>
   );
