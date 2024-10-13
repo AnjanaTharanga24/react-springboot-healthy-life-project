@@ -131,9 +131,9 @@ export default function Home() {
                 ))}
               </div>
 
-              <div className="d-flex ms-3 p-3">
+              <div className="d-flex btn-field p-3" style={{marginRight:"400px"}}>
                 <button
-                  className="btn btn-dark previous-btn  mb-4"
+                  className="btn btn-dark previous-btn mb-4"
                   onClick={handlePrevious}
                 >
                   <FontAwesomeIcon className="me-2" icon={faCircleArrowLeft} />
@@ -188,6 +188,7 @@ export default function Home() {
                 <button
                   className="btn btn-success next-btn mb-4 ms-4"
                   onClick={handleNext}
+                  style={{width:"300px"}}
                 >
                   Next
                   <FontAwesomeIcon className="ms-2" icon={faCircleArrowRight} />
