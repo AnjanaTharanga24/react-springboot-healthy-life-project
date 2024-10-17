@@ -170,25 +170,26 @@ export default function Home() {
 
               <input
                 type="number"
-                className="form-control w-75 ms-5"
+                className="form-control w-75 ms-5 "
                 placeholder="Enter age"
                 name="age"
                 value={answers.age}
                 onChange={handleInputChange}
               />
 
-              <div className="d-flex ms-3 p-3 ">
+              <div className="d-flex p-3" style={{width:"400px" , marginBottom:"-20px"}}>
                 <button
-                  className="btn btn-dark previous-btn  mb-4"
+                  className="btn btn-dark previous-btn bg-dark  mb-4"
                   onClick={handlePrevious}
+                  style={{width:"170px"}}
                 >
                   <FontAwesomeIcon className="me-2" icon={faCircleArrowLeft} />
                   Previous
                 </button>
                 <button
-                  className="btn btn-success next-btn mb-4 ms-4"
+                  className="btn btn-success next-btn mb-4 ms-2 "
                   onClick={handleNext}
-                  style={{width:"300px"}}
+                  style={{width:"150px"}}
                 >
                   Next
                   <FontAwesomeIcon className="ms-2" icon={faCircleArrowRight} />
@@ -224,17 +225,19 @@ export default function Home() {
                 onChange={handleInputChange}
               />
 
-              <div className="d-flex ms-3 p-3 ">
+<div className="d-flex p-3" style={{width:"400px" , marginBottom:"-20px"}}>
                 <button
-                  className="btn btn-dark previous-btn  mb-4"
+                  className="btn btn-dark previous-btn bg-dark  mb-4"
                   onClick={handlePrevious}
+                  style={{width:"170px"}}
                 >
                   <FontAwesomeIcon className="me-2" icon={faCircleArrowLeft} />
                   Previous
                 </button>
                 <button
-                  className="btn btn-success next-btn mb-4 ms-4"
+                  className="btn btn-success next-btn mb-4 ms-2 "
                   onClick={handleNext}
+                  style={{width:"150px"}}
                 >
                   Next
                   <FontAwesomeIcon className="ms-2" icon={faCircleArrowRight} />
@@ -271,17 +274,19 @@ export default function Home() {
                 onChange={handleInputChange}
               />
 
-              <div className="d-flex ms-3 p-3 ">
+<div className="d-flex p-3" style={{width:"400px" , marginBottom:"-20px"}}>
                 <button
-                  className="btn btn-dark previous-btn  mb-4"
+                  className="btn btn-dark previous-btn bg-dark  mb-4"
                   onClick={handlePrevious}
+                  style={{width:"170px"}}
                 >
                   <FontAwesomeIcon className="me-2" icon={faCircleArrowLeft} />
                   Previous
                 </button>
                 <button
-                  className="btn btn-success next-btn mb-4 ms-4"
+                  className="btn btn-success next-btn mb-4 ms-2 "
                   onClick={handleNext}
+                  style={{width:"150px"}}
                 >
                   Next
                   <FontAwesomeIcon className="ms-2" icon={faCircleArrowRight} />
@@ -306,17 +311,19 @@ export default function Home() {
                 ))}
               </div>
 
-              <div className="d-flex ms-3 p-3 ">
+              <div className="d-flex p-3" style={{width:"400px" , marginBottom:"-20px"}}>
                 <button
-                  className="btn btn-dark previous-btn  mb-4"
+                  className="btn btn-dark previous-btn bg-dark  mb-4"
                   onClick={handlePrevious}
+                  style={{width:"170px"}}
                 >
                   <FontAwesomeIcon className="me-2" icon={faCircleArrowLeft} />
                   Previous
                 </button>
                 <button
-                  className="btn btn-success next-btn mb-4 ms-4"
+                  className="btn btn-success next-btn mb-4 ms-2 "
                   onClick={handleNext}
+                  style={{width:"150px"}}
                 >
                   Next
                   <FontAwesomeIcon className="ms-2" icon={faCircleArrowRight} />
@@ -352,17 +359,19 @@ export default function Home() {
                 onChange={handleInputChange}
               />
 
-              <div className="d-flex ms-3 p-3 ">
+<div className="d-flex p-3" style={{width:"400px" , marginBottom:"-20px"}}>
                 <button
-                  className="btn btn-dark previous-btn  mb-4"
+                  className="btn btn-dark previous-btn bg-dark  mb-4"
                   onClick={handlePrevious}
+                  style={{width:"170px"}}
                 >
                   <FontAwesomeIcon className="me-2" icon={faCircleArrowLeft} />
                   Previous
                 </button>
                 <button
-                  className="btn btn-success next-btn mb-4 ms-4"
+                  className="btn btn-success next-btn mb-4 ms-2 "
                   onClick={handleNext}
+                  style={{width:"150px"}}
                 >
                   Next
                   <FontAwesomeIcon className="ms-2" icon={faCircleArrowRight} />
@@ -385,23 +394,27 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="d-flex ms-3 p-3">
-              <button
-                className="btn btn-dark previous-btn  mb-4"
-                onClick={handlePrevious}
-              >
-                <FontAwesomeIcon className="me-2" icon={faCircleArrowLeft} />
-                Previous
-              </button>
-              <button
-                className="btn btn-success next-btn mb-4 ms-4"
-                onClick={handleSubmit}
-              >
-                Submit
-                <FontAwesomeIcon className="ms-2" icon={faPaperPlane} />
-              </button>
-            </div>
+           
           </div>
+
+          <div className="d-flex p-3" style={{width:"400px" , marginBottom:"-20px"}}>
+                <button
+                  className="btn btn-dark previous-btn bg-dark  mb-4"
+                  onClick={handlePrevious}
+                  style={{width:"170px"}}
+                >
+                  <FontAwesomeIcon className="me-2" icon={faCircleArrowLeft} />
+                  Previous
+                </button>
+                <button
+                  className="btn btn-success next-btn mb-4 ms-2 "
+                  onClick={handleNext}
+                  style={{width:"150px"}}
+                >
+                  Submit
+                <FontAwesomeIcon className="ms-2" icon={faPaperPlane} />
+                </button>
+              </div>
         </div>
         );
       default:
