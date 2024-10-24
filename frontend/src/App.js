@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Register from './pages/Register';
 import Signin from './pages/Signin';
 import { UserProvider } from './components/UserContext';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Signin/>} />
+          <Route path="/dashboard" element={<Dashboard/>} />
         </Routes>
       </Router>
     </div>

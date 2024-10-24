@@ -15,8 +15,10 @@ import cardImage3 from "../images/goalweight.png";
 import axios from "axios";
 import { UserContext } from "../components/UserContext";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
   const {user} = useContext(UserContext);
   const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState({
@@ -59,6 +61,7 @@ export default function Home() {
         showConfirmButton: false,
         timer: 1500
       });
+      navigate('/dashboard')
     } catch (error) {
       Swal.fire({
         position: "center",
@@ -408,7 +411,7 @@ export default function Home() {
                 </button>
                 <button
                   className="btn btn-success next-btn mb-4 ms-2 "
-                  onClick={handleNext}
+                  onClick={handleSubmit}
                   style={{width:"150px"}}
                 >
                   Submit
