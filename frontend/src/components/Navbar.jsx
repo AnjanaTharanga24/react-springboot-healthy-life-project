@@ -76,13 +76,21 @@ export default function () {
               <span className="dropdown-arrow text-white fs-5 ms-2" onClick={toggleDropdown}>▼</span>
               {dropdownOpen && (
                 <div className="dropdown-content show">
-                <li>
+                <li style={{marginTop:"-15px"}}>
                   <Link
                     to="/"
                     onClick={handleLogout}
                     className="dropdown-item text-dark text-center"
                   >
                     Logout
+                  </Link>
+                </li>
+                <li style={{marginTop:"-25px"}}>
+                  <Link
+                    to="/dashboard"
+                    className="dropdown-item text-dark text-center"
+                  >
+                    Dashboard
                   </Link>
                 </li>
                 </div>
