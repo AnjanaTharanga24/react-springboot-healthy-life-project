@@ -16,7 +16,10 @@ export default function Dashboard() {
 
       <div className=" card shadow details-card container mt-5">
         <div className="d-flex justify-content-center">
-         
+         <h1 className="fs-2">Details</h1>
+          <div>
+            <p></p>
+          </div>
         </div>
       </div>
 
