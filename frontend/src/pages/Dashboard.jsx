@@ -1,12 +1,30 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../css/dashboard.css";
 import { UserContext } from "../components/UserContext";
+import axios from "axios";
 const profileImg = require("../images/profile.png");
 
 export default function Dashboard() {
   const { user } = useContext(UserContext);
+  const [answers,setAnswers] = useState(null);
+
+  useEffect(()=>{
+    getAnswers();
+  },[]);
+
+  const getAnswers = async () =>{
+    try {
+      const response = await axios.get(`http://localhost:8082/users/${user.id}/answers`)
+      setAnswers(response.data)
+      console.log(response.data)
+      console.log(user.id)
+    } catch (error) {
+      console.log("error while get answer : ",error)
+      console.log("backend response : " , error.response?.data)
+    }
+  }
   return (
     <div>
       <Navbar />
@@ -27,7 +45,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div className=" card bg-dark content-card2">
-            <div className="d-flex  p-3 ms-3">
+            <div className="d-flex  p-3 ms-4">
               <div className="text-white fs-4">
                 <p>Goal :</p>
                 <p>Gender :</p>
@@ -40,14 +58,14 @@ export default function Dashboard() {
               </div>
 
               <div className="text-white ms-5 fs-4">
-                <p>xxxxxxxx</p>
-                <p>xxxxxxxx</p>
-                <p>xxxxxxx</p>
-                <p>xxxxxx</p>
-                <p>xxxxx</p>
-                <p>xxxxx</p>
-                <p>xxxxx</p>
-                <p>xxxxx</p>
+                <p>{answers?.goal}</p>
+                <p>{answers?.gender.toLowerCase()}</p>
+                <p>{answers?.age}</p>
+                <p>{answers?.height} Cm</p>
+                <p>{answers?.weight} kg</p>
+                <p>{answers?.activityLevel}</p>
+                <p>{answers?.goalWeight} kg</p>
+                <p>{answers?.gymStatus}</p>
               </div>
             </div>
           </div>
