@@ -1,9 +1,24 @@
 .main-card{
     height: 100px;
-    width: 800px;
+    width: 870px;
 }
 
 .details-card{
-    height: 100px;
-    width: 800px;
+    height: auto;
+    width: 900px;
+}
+
+.content-card1{
+    height: 330px;
+    width: 320px;
+}
+.content-card2{
+    height: 330px;
+    width: 550px;
+    margin-left: 20px;
+}
+.profile-img{
+    height: 200px;
+    margin-left: 60px;
+    margin-top: 30px;
 }
