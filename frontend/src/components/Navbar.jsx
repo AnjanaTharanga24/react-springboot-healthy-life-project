@@ -25,11 +25,13 @@ export default function () {
   return (
     <div>
       <nav className="navbar navbar-expand-lg  bg-dark ">
+        <Link to="/">
         <img
           className="mt-2 mb-2"
           src={logo}
           style={{ width: "150px", height: "50px", marginLeft: "20px" }}
         />
+        </Link>
 
         <div style={{ marginLeft: "20px" }}>
           <a className="navbar-brand text-white ms-3" href="#">
