@@ -7,4 +7,5 @@ import com.example.backend.controller.response.AnswerResponse;
 public interface AnswerService {
 
     AnswerResponse createAnswers(Long userId , AnswerRequest answerRequest) throws NotFoundException;
+    AnswerResponse getAnswers(Long userId) throws NotFoundException;
 }

@@ -11,6 +11,9 @@ import com.example.backend.service.AnswerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class AnswerServiceImpl implements AnswerService {
@@ -44,6 +47,26 @@ public class AnswerServiceImpl implements AnswerService {
                 .activityLevel(answer.getActivityLevel())
                 .goalWeight(answer.getGoalWeight())
                 .gymStatus(answer.getGymStatus())
+                .build();
+    }
+
+    @Override
+    public AnswerResponse getAnswers(Long userId) throws NotFoundException {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (!userOptional.isPresent()){
+            throw new NotFoundException("user not found with id " +userId);
+        }
+        Answer answers = answerRepository.getAnswerByUserId(userId);
+
+        return AnswerResponse.builder()
+                .goal(answers.getGoal())
+                .gender(answers.getGender())
+                .age(answers.getAge())
+                .height(answers.getHeight())
+                .weight(answers.getWeight())
+                .activityLevel(answers.getActivityLevel())
+                .goalWeight(answers.getGoalWeight())
+                .gymStatus(answers.getGymStatus())
                 .build();
     }
 }
