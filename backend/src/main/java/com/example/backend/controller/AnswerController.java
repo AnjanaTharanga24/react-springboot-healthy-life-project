@@ -18,4 +18,9 @@ public class AnswerController {
     public AnswerResponse createAnswers(@PathVariable("user-id") Long userId , @RequestBody AnswerRequest answerRequest) throws NotFoundException {
         return answerService.createAnswers(userId, answerRequest);
     }
+
+    @GetMapping("/users/{user-id}/answers")
+    public AnswerResponse getAnswers(@PathVariable("user-id") Long userId) throws NotFoundException{
+       return answerService.getAnswers(userId);
+    }
 }
