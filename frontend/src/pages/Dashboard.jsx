@@ -44,7 +44,7 @@ export default function Dashboard() {
               <p className="fs-3 mt-3 text-white text-center">{user.email}</p>
             </div>
           </div>
-          <div className=" card bg-dark content-card2">
+          <div className="shadow card bg-dark content-card2">
             <div className="d-flex  p-3 ms-4">
               <div className="text-white fs-4">
                 <p>Goal :</p>
